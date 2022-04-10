@@ -10,7 +10,7 @@ function App() {
     const [currentTab, setCurrentTab] = React.useState('My Team');
     const getTab = () => {
         switch (currentTab) {
-        case 'Groups':
+        case 'My Team':
             return (<MyTeam />);
         default:
             return (<></>);
