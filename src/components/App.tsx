@@ -1,10 +1,10 @@
 import * as React from 'react';
-import TopBar from "./TopBar";
+import TopBar from './TopBar';
 
 function App() {
   return (
     <div className="App">
-        <TopBar/>
+      <TopBar />
     </div>
   );
 }
