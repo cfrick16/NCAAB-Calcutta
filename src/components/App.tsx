@@ -3,11 +3,13 @@ import { withAuthenticator } from '@aws-amplify/ui-react';
 // eslint-disable-next-line import/no-unresolved
 import '@aws-amplify/ui-react/styles.css';
 
+import { useSelector } from 'react-redux';
 import TopBar from './TopBar';
 import MyTeam from './MyTeam';
+import { RootState } from '../redux/store';
 
 function App() {
-    const [currentTab, setCurrentTab] = React.useState('My Team');
+    const currentTab = useSelector((state:RootState) => state.website.currentTab);
     const getTab = () => {
         switch (currentTab) {
         case 'My Team':
@@ -18,8 +20,7 @@ function App() {
     };
     return (
         <div>
-            {currentTab}
-            <TopBar setCurrentTab={setCurrentTab} />
+            <TopBar />
             {getTab()}
         </div>
     );
