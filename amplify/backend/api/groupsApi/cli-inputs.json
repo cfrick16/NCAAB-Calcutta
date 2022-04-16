@@ -16,22 +16,6 @@
           "read"
         ]
       }
-    },
-    "/groups/*": {
-      "name": "/groups/*",
-      "lambdaFunction": "groupsLambda",
-      "permissions": {
-        "setting": "protected",
-        "auth": [
-          "create",
-          "read",
-          "update",
-          "delete"
-        ],
-        "guest": [
-          "read"
-        ]
-      }
     }
   }
 }
