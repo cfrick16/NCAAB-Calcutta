@@ -18,7 +18,7 @@ function App() {
 
         const requestData = { headers: { Authorization: token } };
         console.log(requestData);
-        const data = await API.get('Groups', '/groups', requestData);
+        const data = await API.get('groupsApi', `/groups/${user.signInUserSession.idToken.jwtToken}`, requestData);
         console.log(data);
     };
 

@@ -29,13 +29,13 @@
     }
   },
   "api": {
-    "Groups": {
+    "groupsApi": {
       "service": "API Gateway",
       "providerPlugin": "awscloudformation",
       "dependsOn": [
         {
           "category": "function",
-          "resourceName": "groups",
+          "resourceName": "groupsLambda",
           "attributes": [
             "Name",
             "Arn"
@@ -45,15 +45,24 @@
     }
   },
   "function": {
-    "groupsLambda": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda"
-    },
     "groups": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
+    },
+    "groupsLambda": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "auth",
+          "resourceName": "nflcalcutta15eb7e86",
+          "attributes": [
+            "UserPoolId"
+          ]
+        }
+      ]
     }
   }
 }

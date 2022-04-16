@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "auth": {
+      "nflcalcutta15eb7e86": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ]
+    }
+  },
+  "lambdaLayers": []
+}

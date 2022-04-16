@@ -11,7 +11,7 @@ export type AmplifyDependentResourcesAttributes = {
         }
     },
     'api': {
-        'Groups': {
+        'groupsApi': {
             'RootUrl': 'string',
             'ApiName': 'string',
             'ApiId': 'string'
@@ -19,12 +19,6 @@ export type AmplifyDependentResourcesAttributes = {
     },
     'function': {
         'groupsLambda': {
-            'Name': 'string',
-            'Arn': 'string',
-            'Region': 'string',
-            'LambdaExecutionRole': 'string'
-        },
-        'groups': {
             'Name': 'string',
             'Arn': 'string',
             'Region': 'string',
