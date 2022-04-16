@@ -16,6 +16,16 @@
         "nflcalcutta6b262254": {},
         "NFLCalcutta": {},
         "nflcalcutta15eb7e86": {}
+      },
+      "function": {
+        "groupsLambda": {
+          "deploymentBucketName": "amplify-amplifyc7b9a653642e4-staging-31324-deployment",
+          "s3Key": "amplify-builds/groupsLambda-726a442f4e424c313775-build.zip"
+        },
+        "groups": {
+          "deploymentBucketName": "amplify-amplifyc7b9a653642e4-staging-31324-deployment",
+          "s3Key": "amplify-builds/groups-69556433664166646443-build.zip"
+        }
       }
     }
   }

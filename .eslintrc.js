@@ -33,6 +33,7 @@ module.exports = {
         indent: ['error', 4],
         'react/jsx-indent': ['error', 4],
         'react/jsx-indent-props': ['error', 4],
+        'react/jsx-props-no-spreading': ['off'],
 
     },
 };

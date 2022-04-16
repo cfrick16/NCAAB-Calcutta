@@ -9,5 +9,26 @@ export type AmplifyDependentResourcesAttributes = {
             'AppClientIDWeb': 'string',
             'AppClientID': 'string'
         }
+    },
+    'api': {
+        'Groups': {
+            'RootUrl': 'string',
+            'ApiName': 'string',
+            'ApiId': 'string'
+        }
+    },
+    'function': {
+        'groupsLambda': {
+            'Name': 'string',
+            'Arn': 'string',
+            'Region': 'string',
+            'LambdaExecutionRole': 'string'
+        },
+        'groups': {
+            'Name': 'string',
+            'Arn': 'string',
+            'Region': 'string',
+            'LambdaExecutionRole': 'string'
+        }
     }
 }
