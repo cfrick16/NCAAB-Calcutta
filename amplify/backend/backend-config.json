@@ -45,11 +45,6 @@
     }
   },
   "function": {
-    "groups": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda"
-    },
     "groupsLambda": {
       "build": true,
       "providerPlugin": "awscloudformation",
