@@ -10,7 +10,7 @@ import MenuItem from '@mui/material/MenuItem';
 import { Auth } from 'aws-amplify';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import { ArrowDropDown } from '@mui/icons-material';
 import { setCurrentLeague, setCurrentTab } from '../redux/actions';
 import { RootState } from '../redux/store';
 
@@ -59,7 +59,7 @@ function TopBar() {
                             }}
                             >
                                 {currentLeague !== '' ? currentLeague : 'SELECT A LEAGUE'}
-                                <ArrowDropDownIcon sx={{ color: 'white' }} />
+                                <ArrowDropDown sx={{ color: 'white' }} />
                             </div>
                         </Button>
                         <Menu
