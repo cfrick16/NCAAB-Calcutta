@@ -1,3 +1,4 @@
+/* eslint-disable */
 /*
 Copyright 2017 - 2017 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with the License. A copy of the License is located at
@@ -11,6 +12,11 @@ See the License for the specific language governing permissions and limitations 
 	ENV
 	REGION
 Amplify Params - DO NOT EDIT */
+const AWS = require('aws-sdk')
+AWS.config.update({ region: 'us-east-1' });
+
+const dynamodb = new AWS.DynamoDB.DocumentClient();
+let tableName = "groupsTable-staging";
 
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -61,8 +67,23 @@ app.post('/groups/*', (req, res) => {
 *************************** */
 
 app.put('/groups', (req, res) => {
+    const timestamp = new Date().toISOString();
+    const params = {
+        TableName: tableName,
+        Item: {
+            ...req.body,
+            members: [req.body.owner],
+            createdAt: timestamp,
+        }
+    };
     // Add your code here
-    res.json({ success: 'put call succeed!', url: req.url, body: req.body });
+    dynamodb.put(params, (error, result) => {
+        if (error) {
+            res.json({ statusCode: 500, error: error.message, url: req.url });
+        } else {
+            res.json({ statusCode: 200, url: req.url, body: JSON.stringify(result.Attributes) });
+        }
+    });
 });
 
 app.put('/groups/*', (req, res) => {

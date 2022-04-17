@@ -59,5 +59,11 @@
         }
       ]
     }
+  },
+  "storage": {
+    "groupsTable": {
+      "service": "DynamoDB",
+      "providerPlugin": "awscloudformation"
+    }
   }
 }

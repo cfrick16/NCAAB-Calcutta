@@ -1,0 +1,10 @@
+{
+  "resourceName": "groupsTable",
+  "tableName": "groupsTable",
+  "partitionKey": {
+    "fieldName": "groupName",
+    "fieldType": "string"
+  },
+  "gsi": [],
+  "triggerFunctions": []
+}

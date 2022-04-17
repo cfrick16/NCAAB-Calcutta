@@ -24,7 +24,6 @@ function TopBar() {
     const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
     const [userName, setUserName] = React.useState('');
     useEffect(() => {
-        console.log(Auth.currentUserInfo());
         Auth.currentUserInfo().then((userInfo) => {
             setUserName(userInfo.attributes.name);
         });
