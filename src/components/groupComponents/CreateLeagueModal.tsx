@@ -23,14 +23,6 @@ function CreateLeagueModal({ createOpen, setCreateOpen }:
     const [entryCost, setEntryCost] = useState('');
 
     const createLeagueOnClick = async () => {
-        console.log({
-            headers: await getHeaders(),
-            body: {
-                groupName: leagueName,
-                entryCost,
-                owner: await getCurrentUser(),
-            },
-        });
         const data = await API.put('groupsApi', '/groups', {
             headers: await getHeaders(),
             body: {
@@ -40,6 +32,7 @@ function CreateLeagueModal({ createOpen, setCreateOpen }:
             },
         });
         console.log(data);
+        setCreateOpen(false);
     };
     return (
         <div>

@@ -39,8 +39,18 @@ app.use((req, res, next) => {
  ********************* */
 
 app.get('/groups', (req, res) => {
-    // Add your code here
-    res.json({ success: 'get call succeed!', url: req.url });
+    let params = {
+        TableName: tableName,
+        limit: 1000
+    }
+    dynamodb.scan(params, (error, result) => {
+        if (error) {
+            res.json({statusCode: 500, error: error.message});
+        } else {
+            const items = result.Items.map((item) => item.groupName)
+            res.json({statusCode: 200, success: 'get call succeeded', url: req.url, body: JSON.stringify(items)})
+        }
+    });
 });
 
 app.get('/groups/*', (req, res) => {
@@ -86,11 +96,28 @@ app.put('/groups', (req, res) => {
     });
 });
 
-app.put('/groups/*', (req, res) => {
+app.put('/groups/:groupName', (req, res) => {
+    let params = {
+        TableName: tableName,
+        Key: {
+            groupName: req.params.groupName
+        },
+        UpdateExpression: "SET members = list_append(members, :newMember)",
+        ExpressionAttributeValues: {
+            ':newMember': [req.body.newMember],
+        },
+        ConditionalExpression: "not(contains(members, :newMember))",
+        ReturnValues: 'UPDATED_NEW'
+    }
     // Add your code here
-    res.json({ success: 'put call succeed!', url: req.url, body: req.body });
+    dynamodb.update(params, (error, result) => {
+        if (error) {
+            res.json({statusCode: 500, error: error.message, url: req.url});
+        } else {
+            res.json({statusCode: 200, url: req.url, body: JSON.stringify(result.Attributes)});
+        }
+    });
 });
-
 /** **************************
 * Example delete method *
 *************************** */

@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     Autocomplete,
     Box, Button, Modal, TextField, Typography,
 } from '@mui/material';
 import { API } from 'aws-amplify';
+import { getCurrentUser, getHeaders } from '../../common/apiHelper';
 
 const style = {
     position: 'absolute' as 'absolute',
@@ -16,15 +17,26 @@ const style = {
     boxShadow: 24,
     p: 4,
 };
-const getGroup = () => {
-    API.get('Groups', '/groups', {}).then((response) => {
-        console.log(response);
-    }).catch((error) => {
-        console.log(error.response);
-    });
-};
 function JoinLeagueModal({ joinOpen, setJoinOpen }:
                                {joinOpen: boolean, setJoinOpen: any}) {
+    const [groups, setGroups] = useState<any[]>([]);
+    const [groupName, setGroupName] = useState('');
+    const joinGroup = async () => {
+        const response = await API.put(
+            'groupsApi',
+            `/groups/${groupName}`,
+            { headers: await getHeaders(), body: { newMember: await getCurrentUser() } },
+        );
+        console.log(response);
+        setJoinOpen(false);
+    };
+    useEffect(() => {
+        getHeaders().then((header) => {
+            API.get('groupsApi', '/groups', { headers: header }).then((res) => {
+                setGroups(JSON.parse(res.body));
+            });
+        });
+    }, []);
     return (
         <div>
             <Modal
@@ -35,11 +47,12 @@ function JoinLeagueModal({ joinOpen, setJoinOpen }:
                     <Typography margin="normal">Joining a League</Typography>
                     <Autocomplete
                         disablePortal
-                        options={[]}
+                        onChange={(e, value) => setGroupName(value)}
+                        options={groups}
                         sx={{ width: 300 }}
                         renderInput={(params) => <TextField {...params} label="League Name" />}
                     />
-                    <Button onClick={getGroup}>Join</Button>
+                    <Button onClick={joinGroup}>Join</Button>
                 </Box>
             </Modal>
         </div>
