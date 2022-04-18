@@ -5,6 +5,7 @@ import {
 } from '@mui/material';
 import { API } from 'aws-amplify';
 import { getCurrentUser, getHeaders } from '../../common/apiHelper';
+import { addGroupToUser } from '../../common/apiCalls';
 
 const style = {
     position: 'absolute' as 'absolute',
@@ -22,15 +23,16 @@ function JoinLeagueModal({ joinOpen, setJoinOpen }:
     const [groups, setGroups] = useState<any[]>([]);
     const [groupName, setGroupName] = useState('');
     const joinGroup = async () => {
-        const response = await API.put(
+        await API.put(
             'groupsApi',
             `/groups/${groupName}`,
             { headers: await getHeaders(), body: { newMember: await getCurrentUser() } },
         );
-        console.log(response);
+        await addGroupToUser(groupName);
         setJoinOpen(false);
     };
     useEffect(() => {
+        // Get list of all groups
         getHeaders().then((header) => {
             API.get('groupsApi', '/groups', { headers: header }).then((res) => {
                 setGroups(JSON.parse(res.body));

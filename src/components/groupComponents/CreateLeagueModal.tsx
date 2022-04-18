@@ -4,6 +4,7 @@ import {
 } from '@mui/material';
 import { API } from 'aws-amplify';
 import { getCurrentUser, getHeaders } from '../../common/apiHelper';
+import { addGroupToUser } from '../../common/apiCalls';
 
 const style = {
     position: 'absolute' as 'absolute',
@@ -19,19 +20,20 @@ const style = {
 
 function CreateLeagueModal({ createOpen, setCreateOpen }:
                                {createOpen: boolean, setCreateOpen: any}) {
-    const [leagueName, setLeagueName] = useState('');
+    const [groupName, setGroupName] = useState('');
     const [entryCost, setEntryCost] = useState('');
 
     const createLeagueOnClick = async () => {
         const data = await API.put('groupsApi', '/groups', {
             headers: await getHeaders(),
             body: {
-                groupName: leagueName,
+                groupName,
                 entryCost,
                 owner: await getCurrentUser(),
             },
         });
         console.log(data);
+        await addGroupToUser(groupName);
         setCreateOpen(false);
     };
     return (
@@ -44,8 +46,8 @@ function CreateLeagueModal({ createOpen, setCreateOpen }:
                     <Typography>Create a League</Typography>
                     <TextField
                         label="League Name"
-                        value={leagueName}
-                        onChange={(e) => setLeagueName(e.target.value)}
+                        value={groupName}
+                        onChange={(e) => setGroupName(e.target.value)}
                         margin="normal"
                     />
                     <TextField

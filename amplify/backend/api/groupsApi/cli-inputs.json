@@ -16,6 +16,13 @@
           "read"
         ]
       }
+    },
+    "/users": {
+      "name": "/users",
+      "lambdaFunction": "usersLambda",
+      "permissions": {
+        "setting": "open"
+      }
     }
   }
 }

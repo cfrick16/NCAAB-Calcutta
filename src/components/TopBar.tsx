@@ -7,15 +7,15 @@ import Menu from '@mui/material/Menu';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
-import { Auth } from 'aws-amplify';
+import { API, Auth } from 'aws-amplify';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ArrowDropDown } from '@mui/icons-material';
 import { setCurrentLeague, setCurrentTab } from '../redux/actions';
 import { RootState } from '../redux/store';
+import { getCurrentUser, getHeaders } from '../common/apiHelper';
 
 const tabs = ['My Team', 'League', 'Marketplace'];
-const leagues = ['League1', 'League2', 'League3'];
 
 function TopBar() {
     const dispatch = useDispatch();
@@ -23,11 +23,23 @@ function TopBar() {
     const [anchorElLeague, setAnchorElLeague] = React.useState<null | HTMLElement>(null);
     const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
     const [userName, setUserName] = React.useState('');
+    const [groups, setGroups] = React.useState<any[]>([]);
+
     useEffect(() => {
-        Auth.currentUserInfo().then((userInfo) => {
-            setUserName(userInfo.attributes.name);
+        getCurrentUser().then((user) => {
+            getHeaders().then((headers) => {
+                console.log(headers);
+                API.get('groupsApi', `/users/${user.email}`, {
+                    headers,
+                }).then((res) => {
+                    console.log(res);
+                    console.log(JSON.parse(res.body));
+                    setGroups(JSON.parse(res.body).groups);
+                });
+            });
+            setUserName(user.name);
         });
-    });
+    }, []);
 
     return (
         <AppBar position="static">
@@ -72,10 +84,13 @@ function TopBar() {
                             open={Boolean(anchorElLeague)}
                             onClose={() => setAnchorElLeague(null)}
                         >
-                            {leagues.map((league) => (
-                                <MenuItem onClick={() => dispatch(setCurrentLeague(league))}>
+                            {groups.map((group) => (
+                                <MenuItem
+                                    key={group}
+                                    onClick={() => dispatch(setCurrentLeague(group))}
+                                >
                                     <Typography textAlign="center">
-                                        {league}
+                                        {group}
                                     </Typography>
                                 </MenuItem>
                             ))}
