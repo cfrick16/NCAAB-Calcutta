@@ -51,12 +51,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "groupsLambda",
+            "usersLambda",
             {
               "Fn::Join": [
                 "",
                 [
-                  "groupsLambda",
+                  "usersLambda",
                   "-",
                   {
                     "Ref": "env"
@@ -96,12 +96,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "nflcalcuttaLambdaRolef77d549c",
+            "nflcalcuttaLambdaRolefa1e3439",
             {
               "Fn::Join": [
                 "",
                 [
-                  "nflcalcuttaLambdaRolef77d549c",
+                  "nflcalcuttaLambdaRolefa1e3439sss",
                   "-",
                   {
                     "Ref": "env"
