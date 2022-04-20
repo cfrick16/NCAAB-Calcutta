@@ -96,12 +96,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "nflcalcuttaLambdaRolefa1e3439",
+            "nflcalcuttaLambdaRolefa1e3439sss",
             {
               "Fn::Join": [
                 "",
                 [
-                  "nflcalcuttaLambdaRolefa1e3439",
+                  "nflcalcuttaLambdaRolefa1e3439sss",
                   "-",
                   {
                     "Ref": "env"

@@ -50,6 +50,20 @@
           ]
         }
       ]
+    },
+    "tournamentInfo": {
+      "service": "API Gateway",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [
+        {
+          "category": "function",
+          "resourceName": "teamsLambda",
+          "attributes": [
+            "Name",
+            "Arn"
+          ]
+        }
+      ]
     }
   },
   "function": {
@@ -80,6 +94,12 @@
           ]
         }
       ]
+    },
+    "teamsLambda": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": []
     }
   },
   "storage": {
@@ -88,6 +108,10 @@
       "providerPlugin": "awscloudformation"
     },
     "usersTable": {
+      "service": "DynamoDB",
+      "providerPlugin": "awscloudformation"
+    },
+    "teams": {
       "service": "DynamoDB",
       "providerPlugin": "awscloudformation"
     }

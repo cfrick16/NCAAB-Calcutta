@@ -13,6 +13,9 @@
     },
     "groupsApi": {
       "Type": "String"
+    },
+    "tournamentInfo": {
+      "Type": "String"
     }
   },
   "Conditions": {

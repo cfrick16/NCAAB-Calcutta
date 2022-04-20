@@ -15,6 +15,11 @@ export type AmplifyDependentResourcesAttributes = {
             "RootUrl": "string",
             "ApiName": "string",
             "ApiId": "string"
+        },
+        "tournamentInfo": {
+            "RootUrl": "string",
+            "ApiName": "string",
+            "ApiId": "string"
         }
     },
     "function": {
@@ -25,6 +30,12 @@ export type AmplifyDependentResourcesAttributes = {
             "LambdaExecutionRole": "string"
         },
         "usersLambda": {
+            "Name": "string",
+            "Arn": "string",
+            "Region": "string",
+            "LambdaExecutionRole": "string"
+        },
+        "teamsLambda": {
             "Name": "string",
             "Arn": "string",
             "Region": "string",
@@ -41,6 +52,14 @@ export type AmplifyDependentResourcesAttributes = {
             "Region": "string"
         },
         "usersTable": {
+            "Name": "string",
+            "Arn": "string",
+            "StreamArn": "string",
+            "PartitionKeyName": "string",
+            "PartitionKeyType": "string",
+            "Region": "string"
+        },
+        "teams": {
             "Name": "string",
             "Arn": "string",
             "StreamArn": "string",

@@ -58,7 +58,8 @@ app.get('/users/:email', (req, res) => {
         } else {
             res.json({statusCode: 200, url: req.url, body: JSON.stringify(result.Item)})
         }
-    });});
+    });
+});
 
 /** **************************
 * Example post method *
